@@ -1,0 +1,20 @@
+{
+  "name": "bdm-asset",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "inquirer": "^7.3.2",
+    "stellar-sdk": "^5.0.4"
+  },
+  "devDependencies": {
+    "eslint": "^7.4.0"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "globals": {
+    "Buffer": "readonly",
+    "process": "readonly",
+    "__dirname": "readonly"
+  },
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2020": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 11
+  },
+  "rules": {}
+}
