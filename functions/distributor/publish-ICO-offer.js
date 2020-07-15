@@ -12,6 +12,36 @@ const { distributor, issuer } = require('../../config');
  * @param amount total amount to offer
  * @param price the amount of native assets to receive in exchange of the asset
  */
-const publishICOOffer = async (assetName, amount, price) => {};
+const publishICOOffer = async (assetName, amount, price) => {
+  const distributorKeyPair = StellarSDK.Keypair.fromSecret(distributor.secret);
+
+  const distributorAccount = await server.loadAccount(distributor.public);
+
+  const txOptions = {
+    fee: StellarSDK.BASE_FEE,
+    networkPassphrase: StellarSDK.Networks.TESTNET
+  };
+
+  const transaction = new StellarSDK.TransactionBuilder(
+    distributorAccount,
+    txOptions
+  )
+    .addOperation(
+      StellarSDK.Operation.manageSellOffer({
+        selling: new StellarSDK.Asset(assetName, issuer.public),
+        buying: StellarSDK.Asset.native(),
+        amount: amount.toString(),
+        price
+      })
+    )
+    .setTimeout(100)
+    .build();
+
+  transaction.sign(distributorKeyPair);
+
+  await server.submitTransaction(transaction);
+
+  console.info(`ICO published, selling ${amount} ${assetName}`);
+};
 
 module.exports = publishICOOffer;
